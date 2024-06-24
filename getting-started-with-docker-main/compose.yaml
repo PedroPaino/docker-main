@@ -1,0 +1,25 @@
+version: '3'
+services:
+  back:
+    build: ./back/.
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+  front:
+    build: ./front/.
+    ports:
+      - 8080:8080
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DATABASE: postgres
+    volumes:
+      - api-postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+volumes:
+  api-postgres-data:
